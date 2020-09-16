@@ -11,7 +11,7 @@ public interface CrudRepository<T, I, A> {
 
     public I delete(I i);
 
-    public I update (I i, T t);
+    public I update (I i, T t) throws Exception;
 
     public T get(I identifier);
 

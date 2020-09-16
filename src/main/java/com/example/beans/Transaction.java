@@ -16,7 +16,6 @@ import java.util.UUID;
 @DynamoDBDocument
 public class Transaction extends DynamoDBEntry<Transaction>  implements Serializable {
 
-
     private String id;
 
     private float amount;

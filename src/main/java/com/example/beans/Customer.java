@@ -18,6 +18,9 @@ public class Customer extends DynamoDBEntry<Customer> implements Serializable {
     private String email;
     private float balance;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private String password;
+
     private List<Transaction> transactionList = new ArrayList<>();
 
     @Override
@@ -45,8 +48,7 @@ public class Customer extends DynamoDBEntry<Customer> implements Serializable {
         this.transactionList = transactionList;
     }
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private String password;
+
     
 
     public Customer() {

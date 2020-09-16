@@ -33,6 +33,7 @@ public class DynamoDBCustomerRepository implements CrudRepository<Customer, Stri
         Table table = dynamoDB.getTable("BankCustomer");
 
         System.out.println(customer);
+
         Item item = new Item()
                 .withPrimaryKey("id", customer.getId())
                 .withString("name", customer.getName())
@@ -69,9 +70,19 @@ public class DynamoDBCustomerRepository implements CrudRepository<Customer, Stri
 
     }
 
+
+    //this function,can actually be used as a generic function both for updation
+    //and for creation
     @Override
-    public String update(String s, Customer customer) {
-        return null;
+    public String update(String s, Customer customer) throws Exception {
+        //we configure the mapper to update
+        DynamoDBMapper dynamoDBMapper = new DynamoDBMapper(this.dbInstance, new DynamoDBMapperConfig(DynamoDBMapperConfig.SaveBehavior.UPDATE));
+        if(s.length() > 0){
+            throw new Exception("Id is not provided correctlly");
+        }
+        customer.setId(s);
+        dynamoDBMapper.save(customer);
+        return "Successfully updated body of user " + s;
     }
 
 

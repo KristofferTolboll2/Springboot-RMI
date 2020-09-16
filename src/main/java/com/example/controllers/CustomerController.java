@@ -38,7 +38,6 @@ public class CustomerController extends UnicastRemoteObject  implements Customer
 
     @PostMapping(value = "/customer")
     public String insertCustomer(@RequestBody Customer customer){
-
         customer.generateId();
         String jsonDocument = dynamoDBRepository.create(customer);
         return jsonDocument;
